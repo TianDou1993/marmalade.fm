@@ -30,6 +30,7 @@ class App extends Component {
   mountAudio = async()=>{
     // from mixcloud website
     // when we use this keyword, instead of const,  our widget is now accessible anywhere inside the component
+    console.log(Mixcloud, Mixcloud.PlayerWidget)
     this.widget = Mixcloud.PlayerWidget(this.player);
     // we are waiting for our widget to be ready
     await this.widget.ready;
@@ -38,8 +39,9 @@ class App extends Component {
 
     this.widget.events.pause.on(()=> 
       this.setState({
-      playing:false
-    }))
+        playing:false
+      })
+    )
     this.widget.events.play.on(()=> 
       this.setState({
       playing:true
@@ -59,14 +61,12 @@ class App extends Component {
   
     playMix:(mixName) =>{
       // play a new mix by its name and then start playing it immediately
-      this.widget.load(mixName,true)
+      this.widget.load(mixName, true)
       this.setState({
         currentMix:mixName
-      })
+      })  
     }
   }
-  
-
   render(){
     return (
       // router wraps our whole page and let us use react-router
